@@ -39,4 +39,18 @@ public class BitTreeInteriorNode implements BitTreeNode {
     public BitTreeNode right() {
         return right;
     } // right()
+
+    /**
+     * Set the left.
+     */
+    public void setLeft(BitTreeNode node) {
+        this.left = node;
+    } // setLeft(BitTreeNode)
+
+    /**
+     * Set the right.
+     */
+    public void setRight(BitTreeNode node) {
+        this.right = node;
+    } // setRight(BitTreeNode)
 } // BitTreeInteriorNode
