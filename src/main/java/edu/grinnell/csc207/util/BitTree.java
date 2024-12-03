@@ -58,6 +58,24 @@ public class BitTree {
     } // if/if/else
   } // pave()
 
+  private void dumpHelper(PrintWriter pen, int level, BitTreeNode node, String str) {
+    if (node == null) {
+      return;
+    } // if
+
+    StringBuilder s = new StringBuilder();
+    for (int i = 0; i < level; i++) {
+      s.append("-");
+    } // for
+
+    if (node.get() != null) {
+      str = node.get();
+    }
+    pen.println(s + str);
+    dumpHelper(pen, level + 1, node.left(), new String("0"));
+    dumpHelper(pen, level + 1, node.right(), new String("1"));
+  }
+
   // +---------+-----------------------------------------------------
   // | Methods |
   // +---------+
@@ -103,12 +121,12 @@ public class BitTree {
 
     BitTreeNode cur = head;
     for (int i = 0; i < this.levels; i++) {
-      if (bits.charAt(this.levels - 1) == '0') {
+      if (bits.charAt(i) == '0') {
         if (cur.left() == null) {
           throw new IndexOutOfBoundsException();
         } // if
         cur = cur.left();
-      } else if (bits.charAt(this.levels - 1) == '1') {
+      } else if (bits.charAt(i) == '1') {
         if (cur.right() == null) {
           throw new IndexOutOfBoundsException();
         } // if
@@ -125,7 +143,9 @@ public class BitTree {
    *
    */
   public void dump(PrintWriter pen) {
-    // STUB
+    pen.println("head");
+    dumpHelper(pen, 1, head.left(), new String("0"));
+    dumpHelper(pen, 1, head.right(), new String("1"));
   } // dump(PrintWriter)
 
   /**
