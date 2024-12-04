@@ -7,7 +7,7 @@ import java.io.IOException;
 /**
  *
  *
- * @author Your Name Here
+ * @author Leo Goldman
  * @author Samuel A. Rebelsky
  */
 public class BrailleAsciiTables {
@@ -181,17 +181,17 @@ public class BrailleAsciiTables {
   /**
    *
    */
-  static BitTree a2bTree = null;
+  static BitTree a2bTree = new BitTree(8);
 
   /**
    *
    */
-  static BitTree b2aTree = null;
+  static BitTree b2aTree = new BitTree(6);
 
   /**
    *
    */
-  static BitTree b2uTree = null;
+  static BitTree b2uTree = new BitTree(6);
 
   // +-----------------------+---------------------------------------
   // | Static helper methods |
@@ -205,7 +205,20 @@ public class BrailleAsciiTables {
    *
    */
   public static String toBraille(char letter) {
-    return "";  // STUB
+    InputStream Stream = new ByteArrayInputStream(a2b.getBytes());
+    a2bTree.load(Stream);
+    try {
+      Stream.close();
+    } catch (IOException e) {
+      // We don't care if we can't close the stream.
+    } // try/catch
+    String l = "0".concat(Integer.toBinaryString(letter));
+    try {
+      return a2bTree.get(l);
+    } catch (Exception e) {
+      // cry
+      return null;
+    } // try/catch
   } // toBraille(char)
 
   /**

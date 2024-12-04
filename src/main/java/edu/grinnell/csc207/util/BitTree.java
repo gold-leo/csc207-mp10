@@ -87,7 +87,7 @@ public class BitTree {
    */
   public void set(String bits, String value) {
     if (bits.length() != this.levels) {
-      throw new IndexOutOfBoundsException();
+      throw new IndexOutOfBoundsException(this.levels + " =/ " + bits.length());
     } // if
 
     // Pave a path of interior nodes
@@ -116,23 +116,23 @@ public class BitTree {
    */
   public String get(String bits) {
     if (bits.length() != this.levels) {
-      throw new IndexOutOfBoundsException();
+      throw new IndexOutOfBoundsException(this.levels + " =/ " + bits.length());
     } // if
 
     BitTreeNode cur = head;
     for (int i = 0; i < this.levels; i++) {
       if (bits.charAt(i) == '0') {
         if (cur.left() == null) {
-          throw new IndexOutOfBoundsException();
+          throw new IndexOutOfBoundsException("1");
         } // if
         cur = cur.left();
       } else if (bits.charAt(i) == '1') {
         if (cur.right() == null) {
-          throw new IndexOutOfBoundsException();
+          throw new IndexOutOfBoundsException("2");
         } // if
         cur = cur.right();
       } else {
-        throw new IndexOutOfBoundsException();
+        throw new IndexOutOfBoundsException("3");
       } // if/if/else
     } // for
 
@@ -190,7 +190,12 @@ public class BitTree {
         } // try/catch
       } // for
 
-      this.set(bits.toString(), value.toString());
+      try {
+        this.set(bits.toString(), value.toString());
+      } catch (Exception e) {
+        System.err.println(e.getMessage());
+      }
+      
     } // for
   } // load(InputStream)
 
