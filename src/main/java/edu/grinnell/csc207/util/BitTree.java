@@ -152,7 +152,46 @@ public class BitTree {
    *
    */
   public void load(InputStream source) {
-    // STUB
+    for (;;) {
+      try {
+        if (source.available() == 0) {
+          break;
+        }
+      } catch (Exception e) {
+        System.err.println("very bad");
+      } // try/catch
+
+      StringBuilder bits = new StringBuilder();
+      StringBuilder value = new StringBuilder();
+
+      // Read bits
+      for (;;) {
+        try {
+          char i = (char) source.read();
+          if (i == ',') {
+            break;
+          } // if
+          bits.append(i);
+        } catch (Exception e) {
+          System.err.println("oh no");
+        } // try/catch
+      } // for
+
+      // Read value
+      for (;;) {
+        try {
+          char i = (char) source.read();
+          if (i == '\n') {
+            break;
+          } // if
+          value.append(i);
+        } catch (Exception e) {
+          System.err.println("oh no");
+        } // try/catch
+      } // for
+
+      this.set(bits.toString(), value.toString());
+    } // for
   } // load(InputStream)
 
 } // class BitTree
