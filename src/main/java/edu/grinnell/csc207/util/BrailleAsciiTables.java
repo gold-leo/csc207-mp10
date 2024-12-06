@@ -181,17 +181,17 @@ public class BrailleAsciiTables {
   /**
    *
    */
-  static BitTree a2bTree = new BitTree(8);
+  static BitTree a2bTree;
 
   /**
    *
    */
-  static BitTree b2aTree = new BitTree(6);
+  static BitTree b2aTree;
 
   /**
    *
    */
-  static BitTree b2uTree = new BitTree(6);
+  static BitTree b2uTree;
 
   // +-----------------------+---------------------------------------
   // | Static helper methods |
@@ -205,13 +205,16 @@ public class BrailleAsciiTables {
    *
    */
   public static String toBraille(char letter) {
-    InputStream Stream = new ByteArrayInputStream(a2b.getBytes());
-    a2bTree.load(Stream);
-    try {
-      Stream.close();
-    } catch (IOException e) {
-      // We don't care if we can't close the stream.
-    } // try/catch
+    if (null == a2bTree) {
+      a2bTree = new BitTree(8);
+      InputStream Stream = new ByteArrayInputStream(a2b.getBytes());
+      a2bTree.load(Stream);
+      try {
+        Stream.close();
+      } catch (IOException e) {
+        // We don't care if we can't close the stream.
+      } // try/catch
+    } // if
     String l = "0".concat(Integer.toBinaryString(letter));
     try {
       return a2bTree.get(l);
@@ -236,13 +239,35 @@ public class BrailleAsciiTables {
         // We don't care if we can't close the stream.
       } // try/catch
     } // if
-    return "";  // STUB
+    try {
+      return b2aTree.get(bits);
+    } catch (Exception e) {
+      // cry
+      return e.getMessage();
+    } // try/catch
   } // toAscii(String)
 
   /**
    *
    */
   public static String toUnicode(String bits) {
-    return "";  // STUB
+    if (null == b2uTree) {
+      b2uTree = new BitTree(6);
+      InputStream Stream = new ByteArrayInputStream(b2u.getBytes());
+      b2uTree.load(Stream);
+      try {
+        Stream.close();
+      } catch (IOException e) {
+        // We don't care if we can't close the stream.
+      } // try/catch
+    } // if
+    try {
+      int codePoint = Integer.parseInt(b2uTree.get(bits), 16);
+      char[] ch = Character.toChars(codePoint);
+      return new String(ch);
+    } catch (Exception e) {
+      // cry
+      return e.getMessage();
+    } // try/catch
   } // toUnicode(String)
 } // BrailleAsciiTables
