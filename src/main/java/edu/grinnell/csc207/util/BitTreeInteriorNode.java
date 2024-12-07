@@ -1,56 +1,66 @@
 package edu.grinnell.csc207.util;
 
+/**
+ * Interior node of BitTree.
+ *
+ * @author Leo
+ */
 public class BitTreeInteriorNode implements BitTreeNode {
-    /**
-     * Left node.
-     */
-    public BitTreeNode left;
+  /**
+   * Left node.
+   */
+  private BitTreeNode left;
 
-    /**
-     * Right node.
-     */
-    public BitTreeNode right;
+  /**
+   * Right node.
+   */
+  private BitTreeNode right;
 
-    public BitTreeInteriorNode() {
-        this.left = null;
-        this.right = null;
-    } //BitTreeInteriorNode()
+  /**
+   * Constructor.
+   */
+  public BitTreeInteriorNode() {
+    this.left = null;
+    this.right = null;
+  } //BitTreeInteriorNode()
 
-    /**
-     * Gets the leaf value.
-     * @return value
-     */
-    public String get() {
-        return null;
-    } // get()
+  /**
+   * Gets the leaf value.
+   * @return value
+   */
+  public String get() {
+    return null;
+  } // get()
 
-    /**
-     * Get the left.
-     * @return left
-     */
-    public BitTreeNode left() {
-        return left;
-    } // left()
+  /**
+   * Get the left.
+   * @return left
+   */
+  public BitTreeNode left() {
+    return left;
+  } // left()
 
-    /**
-     * Get the right.
-     * @return right
-     */
-    public BitTreeNode right() {
-        return right;
-    } // right()
+  /**
+   * Get the right.
+   * @return right
+   */
+  public BitTreeNode right() {
+    return right;
+  } // right()
 
-    /**
-     * Set the left.
-     */
-    public void setLeft(BitTreeNode node) {
-        this.left = node;
-    } // setLeft(BitTreeNode)
+  /**
+   * Set the left.
+   * @param node
+   */
+  public void setLeft(BitTreeNode node) {
+    this.left = node;
+  } // setLeft(BitTreeNode)
 
-    /**
-     * Set the right.
-     */
-    public void setRight(BitTreeNode node) {
-        this.right = node;
-    } // setRight(BitTreeNode)
+  /**
+   * Set the right.
+   * @param node
+   */
+  public void setRight(BitTreeNode node) {
+    this.right = node;
+  } // setRight(BitTreeNode)
 } // BitTreeInteriorNode

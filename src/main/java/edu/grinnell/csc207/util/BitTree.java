@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 
 /**
- * Trees intended to be used in storing mappings between fixed-length 
+ * Trees intended to be used in storing mappings between fixed-length
  * sequences of bits and corresponding values.
  *
  * @author Leo Goldman
@@ -14,7 +14,14 @@ public class BitTree {
   // | Fields |
   // +--------+
 
+  /**
+   * The number of levels.
+   */
   int levels;
+
+  /**
+   * The head of the tree.
+   */
   BitTreeInteriorNode head;
 
   // +--------------+------------------------------------------------
@@ -22,7 +29,8 @@ public class BitTree {
   // +--------------+
 
   /**
-   *
+   * Constructor.
+   * @param n
    */
   public BitTree(int n) {
     this.levels = n;
@@ -35,11 +43,11 @@ public class BitTree {
 
   /**
    * Paves the way for set.
-   * @param i 
+   * @param i
    *    0 or 1.
    * @param current
    *    The current node.
-   * @return 
+   * @return
    *    The next node.
    */
   private BitTreeInteriorNode pave(char i, BitTreeInteriorNode current) {
@@ -70,11 +78,11 @@ public class BitTree {
 
     if (node.get() != null) {
       str = node.get();
-    }
+    } // if
     pen.println(s + str);
     dumpHelper(pen, level + 1, node.left(), new String("0"));
     dumpHelper(pen, level + 1, node.right(), new String("1"));
-  }
+  } // if
 
   // +---------+-----------------------------------------------------
   // | Methods |
@@ -140,7 +148,8 @@ public class BitTree {
   } // get(String, String)
 
   /**
-   *
+   * Dump the tree.
+   * @param pen
    */
   public void dump(PrintWriter pen) {
     pen.println("head");
@@ -149,14 +158,15 @@ public class BitTree {
   } // dump(PrintWriter)
 
   /**
-   *
+   * Load from an InputStream.
+   * @param source
    */
   public void load(InputStream source) {
     for (;;) {
       try {
         if (source.available() == 0) {
           break;
-        }
+        } // if
       } catch (Exception e) {
         System.err.println("very bad");
       } // try/catch
@@ -194,8 +204,8 @@ public class BitTree {
         this.set(bits.toString(), value.toString());
       } catch (Exception e) {
         System.err.println(e.getMessage());
-      }
-      
+      } // try
+
     } // for
   } // load(InputStream)
 

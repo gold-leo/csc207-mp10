@@ -1,12 +1,12 @@
 package edu.grinnell.csc207.main;
 
 import java.io.PrintWriter;
-import java.util.function.*;
+import java.util.function.Function;
 
 import edu.grinnell.csc207.util.BrailleAsciiTables;
 
 /**
- *
+ * Main class.
  */
 public class BrailleASCII {
   // +------+--------------------------------------------------------
@@ -14,7 +14,8 @@ public class BrailleASCII {
   // +------+
 
   /**
-   *
+   * Main.
+   * @param args
    */
   public static void main(String[] args) {
     PrintWriter pen = new PrintWriter(System.out, true);
@@ -39,7 +40,7 @@ public class BrailleASCII {
         converter = BrailleAsciiTables::toAscii;
         set = args[1];
         break;
-    
+
       case "unicode":
         StringBuilder intermediary = new StringBuilder();
         for (int i = 0; i < args[1].length(); i++) {
@@ -58,7 +59,7 @@ public class BrailleASCII {
     // Loop through the second arg's chars.
     for (int i = 0; i < set.length(); i += 6) {
       try {
-        result.append(converter.apply(set.substring(i, i+6)));
+        result.append(converter.apply(set.substring(i, i + 6)));
       } catch (Exception e) {
         pen.println("Improper conversion string.");
         return;
@@ -68,5 +69,4 @@ public class BrailleASCII {
     pen.print(result.toString());
     pen.close();
   } // main(String[]
-
 } // class BrailleASCII

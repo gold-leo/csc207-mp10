@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.IOException;
 
 /**
- *
+ * Conversions between Braille, ASCII & Unicode.
  *
  * @author Leo Goldman
  * @author Samuel A. Rebelsky
@@ -18,7 +18,7 @@ public class BrailleAsciiTables {
   /**
    * Conversions from ASCII to braille.
    */
-  static final String a2b = 
+  static final String a2b =
       "01000001,100000\n"
       + "01000010,110000\n"
       + "01000011,100100\n"
@@ -179,17 +179,17 @@ public class BrailleAsciiTables {
   // +---------------+
 
   /**
-   *
+   * ASCII to Braille Tree.
    */
   static BitTree a2bTree;
 
   /**
-   *
+   * Braille to ASCII Tree.
    */
   static BitTree b2aTree;
 
   /**
-   *
+   * Braille to Unicode Tree.
    */
   static BitTree b2uTree;
 
@@ -202,15 +202,18 @@ public class BrailleAsciiTables {
   // +----------------+
 
   /**
+   * Converts ASCII char to Braille.
    *
+   * @param letter
+   * @return Braille.
    */
   public static String toBraille(char letter) {
     if (null == a2bTree) {
       a2bTree = new BitTree(8);
-      InputStream Stream = new ByteArrayInputStream(a2b.getBytes());
-      a2bTree.load(Stream);
+      InputStream a2bStream = new ByteArrayInputStream(a2b.getBytes());
+      a2bTree.load(a2bStream);
       try {
-        Stream.close();
+        a2bStream.close();
       } catch (IOException e) {
         // We don't care if we can't close the stream.
       } // try/catch
@@ -225,7 +228,10 @@ public class BrailleAsciiTables {
   } // toBraille(char)
 
   /**
-   *
+   * Converts braille to Ascii.
+   * @param bits
+   *    Braille
+   * @return ASCII
    */
   public static String toAscii(String bits) {
     // Make sure we've loaded the braille-to-ASCII tree.
@@ -248,15 +254,19 @@ public class BrailleAsciiTables {
   } // toAscii(String)
 
   /**
+   * Converts braille to Unicode.
    *
+   * @param bits
+   *    Braille
+   * @return Unicode
    */
   public static String toUnicode(String bits) {
     if (null == b2uTree) {
       b2uTree = new BitTree(6);
-      InputStream Stream = new ByteArrayInputStream(b2u.getBytes());
-      b2uTree.load(Stream);
+      InputStream b2uStream = new ByteArrayInputStream(b2u.getBytes());
+      b2uTree.load(b2uStream);
       try {
-        Stream.close();
+        b2uStream.close();
       } catch (IOException e) {
         // We don't care if we can't close the stream.
       } // try/catch
