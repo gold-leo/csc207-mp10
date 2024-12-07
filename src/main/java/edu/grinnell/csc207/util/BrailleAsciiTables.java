@@ -215,12 +215,12 @@ public class BrailleAsciiTables {
         // We don't care if we can't close the stream.
       } // try/catch
     } // if
-    String l = "0".concat(Integer.toBinaryString(letter));
+    String l = String.format("%8s", Integer.toBinaryString(letter)).replace(' ', '0');
     try {
       return a2bTree.get(l);
     } catch (Exception e) {
       // cry
-      return null;
+      return e.getMessage();
     } // try/catch
   } // toBraille(char)
 
