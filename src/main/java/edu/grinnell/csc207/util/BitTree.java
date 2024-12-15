@@ -208,5 +208,4 @@ public class BitTree {
 
     } // for
   } // load(InputStream)
-
 } // class BitTree
